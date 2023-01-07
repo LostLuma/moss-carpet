@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.lostluma.moss_carpet.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "BuiltInRegistriesMixin",
+    "PhantomSpawnerMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

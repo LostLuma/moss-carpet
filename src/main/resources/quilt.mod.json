@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "net.lostluma",
+    "id": "moss_carpet",
+    "version": "${version}",
+    "metadata": {
+      "name": "Moss Carpet",
+      "description": "A small carpet extension with soft features.",
+      "contributors": {
+        "LostLuma": "Owner"
+      },
+      "contact": {
+        "homepage": "https://github.com/LostLuma/Moss-Carpet",
+        "issues": "https://github.com/LostLuma/Moss-Carpet/issues",
+        "sources": "https://github.com/LostLuma/Moss-Carpet"
+      },
+      "license": {
+        "name": "LGPL License",
+        "id": "LGPL-3.0-or-later",
+        "url": "https://github.com/LostLuma/Moss-Carpet/blob/stardust/LICENSE"
+      }
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {},
+    "depends": [
+      {
+        "id": "carpet",
+        "versions": "*"
+      },
+      {
+        "id": "quilt_loader",
+        "versions": "^0.17.6-"
+      },
+      {
+        "id": "minecraft",
+        "versions": "~1.19.3-"
+      }
+    ]
+  },
+  "mixin": "moss_carpet.mixins.json"
+}
