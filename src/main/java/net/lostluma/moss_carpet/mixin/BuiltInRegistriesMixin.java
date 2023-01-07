@@ -10,8 +10,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 
 @Mixin(BuiltInRegistries.class)
 public class BuiltInRegistriesMixin {
-	@Inject(method = "freeze()V", at = @At("HEAD"))
-	private static void moss_carpet$onRegistryFreeze(CallbackInfo callbackInfo) {
+	@Inject(method = "createContents()V", at = @At("RETURN"))
+	private static void moss_carpet$afterContentRegistration(CallbackInfo callbackInfo) {
 		MossCarpet.init();
 	}
 }
