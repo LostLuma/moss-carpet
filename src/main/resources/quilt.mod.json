@@ -26,15 +26,15 @@
     "depends": [
       {
         "id": "carpet",
-        "versions": "^1.4.93-"
+        "versions": ">=1.4.112"
       },
       {
         "id": "quilt_loader",
-        "versions": "^0.17.6-"
+        "versions": ">=0.20.2"
       },
       {
         "id": "minecraft",
-        "versions": "~1.19.3-"
+        "versions": "=1.20.1"
       }
     ]
   },

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import net.lostluma.moss_carpet.MossCarpetSettings;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.levelgen.PhantomSpawner;
 
 @Mixin(PhantomSpawner.class)
@@ -17,11 +17,11 @@ public class PhantomSpawnerMixin {
 
 	@Redirect(
 		method = "tick(Lnet/minecraft/server/level/ServerLevel;ZZ)I",
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isSpectator()Z")
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;isSpectator()Z")
 	)
-	private boolean moss_carpet$shouldDisablePhantoms(Player player) {
+	private boolean moss_carpet$shouldDisablePhantoms(ServerPlayer player) {
 		BlockPos position = player.blockPosition();
-		BlockPos spawn = player.getLevel().getSharedSpawnPos();
+		BlockPos spawn = player.level().getSharedSpawnPos();
 
 		return player.isSpectator() || (isInsomniaDisabled(position.getX(), spawn.getX()) && isInsomniaDisabled(position.getZ(), spawn.getZ()));
 	}
