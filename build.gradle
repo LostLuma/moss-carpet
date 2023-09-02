@@ -27,7 +27,10 @@ dependencies {
 		officialMojangMappings()
 	}
 
-	modImplementation libs.carpet
+	modImplementation(libs.carpet) {
+		exclude group: 'net.fabricmc', module: 'fabric-loader' // Temporary Quilt Loom 1.3 fix
+	}
+
 	modImplementation libs.quilt.loader
 }
 
