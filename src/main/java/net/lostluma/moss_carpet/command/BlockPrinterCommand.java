@@ -8,7 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
@@ -32,18 +34,29 @@ public class BlockPrinterCommand {
 		ServerPlayer player = source.getPlayer();
 
 		BlockPos startPos = player.getOnPos().above();
+		Direction lookingDirection = player.getMotionDirection();
+
+		Direction forwardDirection = lookingDirection.getAxis() == Axis.Y ? Direction.NORTH : lookingDirection;
+		Direction rightDirection = lookingDirection.getClockWise();
+
 		int blocksIterated = 0;
+		int rowLength = 16;
 
 		RegistryLookup<Block> blockRegistry = registry.lookupOrThrow(Registries.BLOCK);
 
 		for (ResourceKey<Block> blockId : blockRegistry.listElementIds().toList()) {
 			Block block = blockRegistry.get(blockId).get().value();
-			BlockPos placePos = startPos.relative(Direction.NORTH, blocksIterated + 1);
+			BlockPos placePos = startPos
+				.relative(forwardDirection, blocksIterated % rowLength + 1)
+				.relative(rightDirection, Math.floorDiv(blocksIterated, rowLength));
 
 			world.setBlock(placePos, block.defaultBlockState(), 2);
 
 			blocksIterated++;
 		}
+
+		int blocksFilled = blocksIterated;
+		source.sendSuccess(() -> Component.translatable("commands.fill.success", blocksFilled), true);
 
 		return 1;
 	}
