@@ -21,7 +21,7 @@ public class CommandsMixin {
 	private CommandDispatcher<CommandSourceStack> dispatcher;
 
 	@Inject(method = "<init>", at = @At("RETURN"))
-	private void onRegister(Commands.CommandSelection selection, CommandBuildContext buildContext, CallbackInfo ci) {
+	private void moss_carpet$onRegister(Commands.CommandSelection selection, CommandBuildContext buildContext, CallbackInfo callbackInfo) {
 		BlockPrinterCommand.register(this.dispatcher, buildContext);
 	}
 }
